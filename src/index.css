@@ -1,0 +1,79 @@
+/* Size-matched fallbacks so the web-font swap does not move text (metrics measured from the font files). */
+@font-face { font-family: "Inter Fallback"; src: local("Arial"); font-weight: 400 500; size-adjust: 107.4%; ascent-override: 90.2%; descent-override: 22.5%; line-gap-override: 0%; }
+@font-face { font-family: "Plus Jakarta Sans Fallback"; src: local("Arial Bold"), local("Arial"); font-weight: 700 800; size-adjust: 100.5%; ascent-override: 103.3%; descent-override: 22.1%; line-gap-override: 0%; }
+
+/* Layout: single-column scroll, sticky glass nav, dark slate ground with emerald/cyan light leaking in from the corners. */
+  :root {
+    color-scheme: dark;
+    --bg: #0B0F19;
+    --bg-deep: #030712;
+    --glass: rgba(30, 41, 59, 0.55);
+    --glass-strong: rgba(30, 41, 59, 0.85);
+    --line: rgba(255, 255, 255, 0.08);
+    --line-strong: rgba(255, 255, 255, 0.16);
+    --fg: #F9FAFB;
+    --muted: #9CA3AF;
+    --emerald: #10B981;
+    --emerald-soft: #34D399;
+    --cyan: #06B6D4;
+    --cyan-soft: #22D3EE;
+    --on-accent: #04130E;
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: Inter, system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--line);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+  .grad-text {
+    background: linear-gradient(90deg, var(--emerald-soft), var(--cyan-soft));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grad-bg { background-image: linear-gradient(90deg, var(--emerald), var(--cyan)); }
+  .icon { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .icon-sm { width: 1rem; height: 1rem; }
+  .btn { transition: all 300ms ease-in-out; }
+  .btn:hover { transform: scale(1.02); }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { color: var(--on-accent); box-shadow: 0 0 0 rgba(16,185,129,0); }
+  .btn-primary:hover { box-shadow: 0 0 32px rgba(16,185,129,0.45); }
+  .card-hover { transition: all 300ms ease-in-out; }
+  .card-hover:hover { transform: translateY(-4px); border-color: rgba(16,185,129,0.4); box-shadow: 0 16px 48px rgba(16,185,129,0.12); }
+  .eyebrow { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--emerald-soft); }
+  .badge { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.75rem; padding: 0.25rem 0.625rem; border-radius: 9999px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--muted); transition: all 300ms ease-in-out; }
+  .badge:hover { color: var(--emerald-soft); border-color: rgba(16,185,129,0.45); background: rgba(16,185,129,0.08); }
+  .bar { height: 0.375rem; border-radius: 9999px; background: rgba(255,255,255,0.08); overflow: hidden; }
+  .bar > span { display: block; height: 100%; border-radius: 9999px; background-image: linear-gradient(90deg, var(--emerald), var(--cyan)); }
+  .field { width: 100%; background: rgba(3,7,18,0.6); border: 1px solid var(--line); border-radius: 0.75rem; padding: 0.75rem 1rem; color: var(--fg); font: inherit; transition: all 300ms ease-in-out; }
+  .field::placeholder { color: #6B7280; }
+  .field:focus { outline: none; border-color: var(--emerald); box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan-soft); outline-offset: 3px; border-radius: 0.5rem; }
+  .ping-dot { animation: ping 1.8s cubic-bezier(0,0,0.2,1) infinite; }
+  .glow { border-radius: 9999px; transform: scale(1.7); }
+  .glow-e { background: radial-gradient(closest-side, rgba(16,185,129,0.11), rgba(16,185,129,0.05) 55%, rgba(16,185,129,0) 100%); }
+  .glow-c { background: radial-gradient(closest-side, rgba(6,182,212,0.11), rgba(6,182,212,0.05) 55%, rgba(6,182,212,0) 100%); }
+  .upcoming-card { transition: all 300ms ease-in-out; }
+  .upcoming-card:hover { border-color: rgba(6,182,212,0.7) !important; box-shadow: 0 16px 48px rgba(6,182,212,0.14); }
+  @keyframes ping { 75%, 100% { transform: scale(2.4); opacity: 0; } }
+  .drawer { transform: translateX(100%); visibility: hidden; transition: transform 300ms ease-in-out, visibility 0s linear 300ms; }
+  .drawer.open { transform: translateX(0); visibility: visible; transition: transform 300ms ease-in-out; }
+  .send-plane { transition: transform 400ms ease-in-out; }
+  #send-btn:hover .send-plane { transform: translate(3px, -3px); }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .ping-dot { animation: none; }
+    .btn, .card-hover, .drawer, .send-plane { transition: none; }
+  }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
